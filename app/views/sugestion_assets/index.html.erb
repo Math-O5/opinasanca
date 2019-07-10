@@ -3,13 +3,12 @@
 <% if has_banners? %>
   <%= render "shared/banner" %>
 <% end %>
-
 <main>
-         <div class="map">
-                <h3><%= t("sugestion_assets.index.title") %></h3>
-                <%= render_map(@map_location, "Sugira um bem", false, nil, nil) %>
-               
-</div>
-         </div>
+    <div class="map">
+          <h3><%= t("sugestion_assets.title") %></h3>
+          #<%= render_map(@map_location, "Sugira um bem", false, nil, nil) %>
+          <%= render_map(@map_location, "Sugira um bem", true, nil, @test) %>
+    </div>
 </main>
+
 

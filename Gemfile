@@ -5,14 +5,19 @@ gem 'rails', '4.2.11'
 # custom
 
 # Only linux:
-# gem 'unicorn', '~> 5.4.1'
-# gem 'pg', '~> 0.21.0'
-# In Windowns, instead use this
- platforms :ruby do 
- gem 'unicorn', '~> 5.4.1'
- end
- gem 'tzinfo-data'
- gem 'pg', '0.20.0'
+gem 'unicorn', '~> 5.4.1'
+gem 'pg', '~> 0.20.0'
+
+# Only Windowns,
+#platforms :ruby do 
+#gem 'unicorn', '~> 5.4.1'
+#end
+
+
+
+
+gem 'tzinfo-data'
+#gem 'pg', '0.20.0'
 
 # end custom
 

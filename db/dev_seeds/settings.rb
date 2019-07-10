@@ -28,6 +28,7 @@ section "Creating Settings" do
   Setting.create(key: 'org_name', value: 'OpinaSanca')
   Setting.create(key: 'place_name', value: 'São Carlos')
 
+  Setting.create(key: 'feature.welcome', value: "true")
   Setting.create(key: 'feature.debates', value: "true")
   Setting.create(key: 'feature.proposals', value: "true")
   Setting.create(key: 'feature.featured_proposals', value: "true")
@@ -52,12 +53,12 @@ section "Creating Settings" do
   Setting.create(key: 'feature.help_page', value: "true")
 
 # custom
-  #Setting.create(key: 'feature.sugestion_assets', value: "true")
+  Setting.create(key: 'feature.sugestion_assets', value: "true")
   
   Setting.create(key: 'per_page_code_head', value: "")
   Setting.create(key: 'per_page_code_body', value: "")
   Setting.create(key: 'comments_body_max_length', value: '1000')
-  Setting.create(key: 'mailer_from_name', value: 'CONSUL')
+  Setting.create(key: 'mailer_from_name', value: 'OPINASANCA')
   Setting.create(key: 'mailer_from_address', value: 'noreply@consul.dev')
   Setting.create(key: 'meta_title', value: 'CONSUL')
   Setting.create(key: 'meta_description', value: 'Citizen participation tool for an open, '\
@@ -76,5 +77,5 @@ section "Creating Settings" do
 
   Setting['feature.homepage.widgets.feeds.proposals'] = true
   Setting['feature.homepage.widgets.feeds.debates'] = true
-  Setting['feature.homepage.widgets.feeds.processes'] = true
+  Setting['feature.homepage.widgets.feeds.processes'] = nil
 end

@@ -47,7 +47,7 @@ module MapLocationsHelper
 
   private
 
-  def prepare_map_settings(map_location, editable, parent_class, investments_coordinates=nil)
+  def prepare_map_settings(map_location, editable, parent_class, investments_coordinates=nil, op_mark = 0)
     options = {
       map: "",
       map_center_latitude: map_location_latitude(map_location),
@@ -63,8 +63,9 @@ module MapLocationsHelper
       marker_investments_coordinates: investments_coordinates
       
     }
-    options[:marker_latitude] = map_location.latitude if map_location.latitude.present?
-    options[:marker_longitude] = map_location.longitude if map_location.longitude.present?
+
+    #options[:marker_latitude] = map_location.latitude if map_location.latitude.present?
+    #options[:marker_longitude] = map_location.longitude if map_location.longitude.present?
     options
   end
 
