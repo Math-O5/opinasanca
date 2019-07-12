@@ -13,8 +13,12 @@ class SugestionAssetsController < ApplicationController
     load_map 
   end
 
+  def new 
+    @sugestions = SugestionAsset.new
+  end
+
   def create
-    @sugestions = SugestionAsset.new(sugestions_params)
+    @sugestions = SugestionAsset.new
 
     if @sugestions.save
       redirect_to share_proposal_path(@sugestions), notice: I18n.t('flash.actions.create.sugestion')
@@ -45,8 +49,8 @@ class SugestionAssetsController < ApplicationController
 private
 
 def sugestions_params
-  params.require(:sugestion_assets).permit(:title, :description, :user_id,
-                                   map_location_attributes: [:latitude, :longitude])
+  params.require(:sugestion_asset).permit(:id, :sugestion_id, :title, :description, :user_id, :skip_map,
+                                   map_location_attributes: [:latitude, :longitude, :zoom])
 end
 
 def load_map
@@ -54,6 +58,6 @@ def load_map
     @map_location.zoom = 20
     @map_location.latitude = -22.0090183.to_f
     @map_location.longitude = -47.8914832.to_f
-  end
+end
 
 end
