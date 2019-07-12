@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190531013531) do
+ActiveRecord::Schema.define(version: 20190711013252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1272,6 +1272,18 @@ ActiveRecord::Schema.define(version: 20190531013531) do
   add_index "spending_proposals", ["author_id"], name: "index_spending_proposals_on_author_id", using: :btree
   add_index "spending_proposals", ["geozone_id"], name: "index_spending_proposals_on_geozone_id", using: :btree
   add_index "spending_proposals", ["tsv"], name: "index_spending_proposals_on_tsv", using: :gin
+
+  create_table "sugestion_assets", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
+    t.integer  "user_id"
+    t.boolean  "visible"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "sugestion_id"
+  end
 
   create_table "sugestion_asstes", force: :cascade do |t|
     t.datetime "created_at", null: false

@@ -2,8 +2,8 @@ require 'database_cleaner'
 DatabaseCleaner.clean_with :truncation
 @logger = Logger.new(STDOUT)
 @logger.formatter = proc do |_severity, _datetime, _progname, msg|
-                      msg unless @avoid_log
-                    end
+  msg unless @avoid_log
+end
 
 def section(section_title)
   @logger.info section_title
@@ -15,6 +15,7 @@ def log(msg)
   @logger.info "#{msg}\n"
 end
 
+require_relative 'dev_seeds/sugestion_assets'
 require_relative 'dev_seeds/settings'
 require_relative 'dev_seeds/geozones'
 require_relative 'dev_seeds/users'
@@ -36,6 +37,5 @@ require_relative 'dev_seeds/widgets'
 require_relative 'dev_seeds/admin_notifications'
 #require_relative 'dev_seeds/legislation_proposals'
 #require_relative 'dev_seeds/milestones'
-require_relative 'dev_seeds/sugestion_assets'
 
 log "All dev seeds created successfuly 👍"

@@ -1,9 +1,10 @@
 class SugestionAssetsController < ApplicationController
   include FeatureFlags
   include FlagActions
+  
   skip_authorization_check
 
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :json_data]
 
   feature_flag :sugestion_assets
   respond_to :html, :js
@@ -12,18 +13,28 @@ class SugestionAssetsController < ApplicationController
     load_map 
   end
 
-  def index
-    sugestions = SugestionAsset.where(visible: true)
+  def create
+    @sugestions = SugestionAsset.new(sugestions_params)
 
-    @sugestion_map_coordinates = MapLocation.where(investment_id: sugestions).map { |l| l.json_data }
+    if @sugestions.save
+      redirect_to share_proposal_path(@sugestions), notice: I18n.t('flash.actions.create.sugestion')
+    else
+      render :new
+    end
+
+  end
+
+  def index
+    @sugestions = SugestionAsset.all
+    @sugestion_map_coordinates = MapLocation.where(investment_id: @sugestions).map { |l| l.json_data }
     load_map
   end
 
   def json_data
-    investment =  Budget::Investment.find(params[:id])
+    sugestion =  SugestionAsset.find(params[:id])
     data = {
-      investment_id: investment.id,
-      investment_title: investment.title,
+      sugestion_id: sugestion.id,
+      sugestion_title: sugestion.title,
     }.to_json
 
     respond_to do |format|
@@ -33,7 +44,12 @@ class SugestionAssetsController < ApplicationController
 
 private
 
-  def load_map
+def sugestions_params
+  params.require(:sugestion_assets).permit(:title, :description, :user_id,
+                                   map_location_attributes: [:latitude, :longitude])
+end
+
+def load_map
     @map_location = MapLocation.new
     @map_location.zoom = 20
     @map_location.latitude = -22.0090183.to_f

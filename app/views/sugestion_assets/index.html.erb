@@ -3,11 +3,29 @@
 <% if has_banners? %>
   <%= render "shared/banner" %>
 <% end %>
+
+<h3> Sugestões para preservar a memória da cidade. </h3>
+
 <main>
+  <% if @sugestions.any? %>
+    <div class="small-12 medium-3 column">
+      <aside class="margin-bottom">
+        <%= link_to t("sugestion_assets.index.nova_sugestao"),
+                    new_sugestion_asset_path,
+                    class: 'button expanded' %>
+      </aside>
+    </div>
+    <% end %>
+
     <div class="map">
-          <h3><%= t("sugestion_assets.title") %></h3>
-          #<%= render_map(@map_location, "Sugira um bem", false, nil, nil) %>
-          <%= render_map(@map_location, "Sugira um bem", true, nil, @test) %>
+        <% if @sugestions.present? %>
+          <% @sugestions.each do |su| %>
+            <%= su.id %>
+            <%= su.title %>
+          <% end %> 
+        <% end %>
+    
+        <%= render_map(@map_location, "Sugira um bem", true, nil, @sugestion_map_coordinates) %>
     </div>
 </main>
 
