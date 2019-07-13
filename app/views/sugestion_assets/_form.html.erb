@@ -1,32 +1,48 @@
-<%= form_for(@sugestions, url: form_url) do |f| %>
-    <%= render 'shared/errors', resource: @sugestions %>
+<%= form_for(@sugestion_asset, url: form_url) do |f| %>
+    <%= render 'shared/errors', resource: @sugestion_asset %>
+ 
+    <div class="small-12 column">
+      <%= f.text_field :title, maxlength: 50 %>
+    </div>
+
+    <div class="ckeditor small-12 column">
+    <%= f.cktext_area :description, maxlength: 255 %>
+    </div>
 
       <% if feature?(:map) %>
         <div class="small-12 column">
-  
+
           <%= render 'map_locations/form_fields',
                      form:     f,
-                     map_location: MapLocation.new,
+                     map_location:  @sugestion_asset.map_location || MapLocation.new,
                      label:    t("sugestion_assets.form.map_location"),
                      help:     t("sugestion_assets.form.map_location_instructions"),
                      remove_marker_label: t("sugestion_assets.form.map_remove_marker"),
-                     parent_class: "sugestion_asset",
+                     parent_class: "map_location",
                      i18n_namespace: "sugestion_asset" %>
   
         </div>
+          <%= f.text_field :latitude%>
+          <%= f.text_field :longitude %>
+          <%= f.check_box :visible%>
+
       <% end %>
 
-      <% if current_user.unverified? %>
-        <div class="small-12 column">
-          <%= f.label :responsible_name, t("proposals.form.proposal_responsible_name") %>
-          <p class="help-text" id="responsible-name-help-text"><%= t("proposals.form.proposal_responsible_name_note") %></p>
-          <%= f.text_field :responsible_name, placeholder: t("proposals.form.proposal_responsible_name"), label: false,
-                                              aria: {describedby: "responsible-name-help-text"} %>
-        </div>
+      <div class="small-12 column">
+      <% if @sugestion_asset.new_record? %>
+        <%= f.label :terms_of_service do %>
+          <%= f.check_box :terms_of_service, title: t('form.accept_terms_title'), label: false %>
+          <span class="checkbox">
+            <%= t("form.accept_terms",
+                policy: link_to(t("form.policy"), "/privacy", target: "blank"),
+                conditions: link_to(t("form.conditions"), "/conditions", target: "blank")).html_safe %>
+          </span>
+        <% end %>
       <% end %>
-  
+    </div>
+
       <div class="actions small-12 column">
-        <%= f.submit(class: "button", value: "Concluir") %>
+        <%= f.submit(class: "button", value: t("sugestion_assets.#{action_name}.form.submit_button")) %>
       </div>
     </div>
   <% end %>

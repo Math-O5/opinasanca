@@ -5,7 +5,7 @@ class Geozone < ActiveRecord::Base
   has_many :proposals
   has_many :spending_proposals
   has_many :debates
-  has_many :users
+  has_many :user
   validates :name, presence: true
 
   scope :public_for_api, -> { all }

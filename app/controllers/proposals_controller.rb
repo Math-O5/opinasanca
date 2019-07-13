@@ -18,7 +18,6 @@ class ProposalsController < ApplicationController
   has_orders ->(c) { Proposal.proposals_orders(c.current_user) }, only: :index
   has_orders %w{most_voted newest oldest}, only: :show
 
-  load_and_helper_meauthorize_resource
   thod :resource_model, :resource_name
   respond_to :html, :js
 

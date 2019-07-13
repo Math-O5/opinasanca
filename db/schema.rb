@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190711013252) do
+ActiveRecord::Schema.define(version: 20190713045254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -790,6 +790,7 @@ ActiveRecord::Schema.define(version: 20190711013252) do
     t.integer "zoom"
     t.integer "proposal_id"
     t.integer "investment_id"
+    t.integer "sugestion_asset_id"
   end
 
   add_index "map_locations", ["investment_id"], name: "index_map_locations_on_investment_id", using: :btree

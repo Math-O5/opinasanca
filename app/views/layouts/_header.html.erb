@@ -1,15 +1,23 @@
+<!-- custom header -->
 <header>
 
-  <div class="top-links">
+  <div class="top-links" style="padding:2px;">
     <div class="row">
       <%= render "shared/locale_switcher" %>
+      <div style="float:right;">
+        <ul class="menu" data-responsive-menu="medium-dropdown">
+          <%= render "shared/admin_login_items" %>
+          <%= render "layouts/notification_item" %>
+          <%= render "devise/menu/login_items" %>
+        </ul>
+      </div>
       <div class="hide-for-small-only">
       </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="top-bar">
+    <div class="img auth-image-header top-bar">
 
       <span data-responsive-toggle="responsive-menu" data-hide-for="medium" class="float-right">
         <span class="menu-icon dark" data-toggle></span>
@@ -24,11 +32,6 @@
 
       <div id="responsive-menu">
         <div class="top-bar-right">
-          <ul class="menu" data-responsive-menu="medium-dropdown">
-            <%= render "shared/admin_login_items" %>
-            <%= render "layouts/notification_item" %>
-            <%= render "devise/menu/login_items" %>
-          </ul>
 
           <div class="show-for-small-only">
             <div class="subnavigation row">

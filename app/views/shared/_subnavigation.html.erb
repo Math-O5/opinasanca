@@ -66,7 +66,15 @@
                                 title: t("shared.go_to_page") + t("layouts.header.help") %>
       </li>
     <% end %>
-  
+    <% if feature?(:budgets) %>
+    <li>
+      <%= layout_menu_link_to t("layouts.header.budgets"),
+                                budgets_path,
+                                controller_name == "budgets" || controller_name == "investments",
+                                accesskey: "6",
+                                title: t("shared.go_to_page") + t("layouts.header.budgets") %>
+    </li>
+  <% end %>
     <%= raw content_block("subnavigation_right", I18n.locale) %>
   </ul>
 </div>
