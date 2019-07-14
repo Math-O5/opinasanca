@@ -26,6 +26,7 @@ App.Map =
     zoomInputSelector        = $(element).data('zoom-input-selector')
     removeMarkerSelector     = $(element).data('marker-remove-selector')
     addMarkerInvestments     = $(element).data('marker-investments-coordinates')
+    addMarkerSugestions     = $(element).data('marker-sugestions-coordinates')
     editable                 = $(element).data('marker-editable')
     marker                   = null;
     markerIcon               = L.divIcon(
@@ -104,6 +105,13 @@ App.Map =
 
           marker.on 'click', openMarkerPopup
 
+    if addMarkerSugestions
+      for i in addMarkerSugestions
+        if App.Map.validCoordinates(i)
+          marker = createMarker(i.lat, i.long)
+          marker.options['id'] = i.sugestion_asset_id
+
+          marker.on 'click', openMarkerPopup
   toggleMap: ->
       $('.map').toggle()
       $('.js-location-map-remove-marker').toggle()

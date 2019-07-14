@@ -90,7 +90,7 @@
         <% unless current_budget.informing? %>
           <div class="map">
             <h3><%= t("budgets.index.map") %></h3>
-            <%= render_map(nil, "budgets", false, nil, @budgets_coordinates) %>
+            <%= render_map(nil, "budgets", false, nil, @budgets_coordinates, nil) %>
           </div>
 
           <p>

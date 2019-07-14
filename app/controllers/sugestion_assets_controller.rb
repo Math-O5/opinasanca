@@ -1,5 +1,6 @@
 class SugestionAssetsController < ApplicationController
   include FeatureFlags
+  include CommentableActions
   include FlagActions
   
   skip_authorization_check
@@ -9,16 +10,13 @@ class SugestionAssetsController < ApplicationController
   feature_flag :sugestion_assets
   respond_to :html, :js
 
-  def show  
-    load_map 
+  def show
+    redirect_to sugestion_asset_path(@sugestion_asset), status: :moved_permanently if request.path != sugestion_asset_path(@sugestion_asset)
   end
 
   def new 
     @sugestion_asset = SugestionAsset.new()
-    @map_location =  SugestionAsset.new()
     load_map
-
-
   end
 
   def create
@@ -36,7 +34,7 @@ class SugestionAssetsController < ApplicationController
 
   def index
     @sugestions = SugestionAsset.all
-    @sugestion_map_coordinates = MapLocation.where(investment_id: @sugestions).map { |l| l.json_data }
+    @sugestion_map_coordinates = MapLocation.where(sugestion_asset_id: @sugestions).map { |l| l.json_data }
     load_map
   end
 
