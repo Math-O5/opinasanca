@@ -1,23 +1,8 @@
 <!-- custom header -->
 <header>
 
-  <div class="top-links" style="padding:2px;">
-    <div class="row">
-      <%= render "shared/locale_switcher" %>
-      <div style="float:right;">
-        <ul class="menu" data-responsive-menu="medium-dropdown">
-          <%= render "shared/admin_login_items" %>
-          <%= render "layouts/notification_item" %>
-          <%= render "devise/menu/login_items" %>
-        </ul>
-      </div>
-      <div class="hide-for-small-only">
-      </div>
-    </div>
-  </div>
-
   <div class="row">
-    <div class="img auth-image-header top-bar">
+    <div class="top-bar">
 
       <span data-responsive-toggle="responsive-menu" data-hide-for="medium" class="float-right">
         <span class="menu-icon dark" data-toggle></span>
@@ -28,8 +13,8 @@
         <%= link_to root_path, accesskey: "0" do %>
           <%= image_tag(image_path_for('custom/logo_header.png'), class: 'float-left', alt: t("layouts.header.logo")) %>
         <% end %>
+        <%= render "shared/locale_switcher" %>
       </div>
-
       <div id="responsive-menu">
         <div class="top-bar-right">
 
@@ -41,8 +26,23 @@
               </div>
             </div>
           </div>
+
+          <div class="top-links" style="padding:2px;">
+          <div class="row">
+            <div style="float:right;">
+            <ul class="menu" data-responsive-menu="medium-dropdown">
+              <%= render "shared/admin_login_items" %>
+              <%= render "layouts/notification_item" %>
+              <%= render "devise/menu/login_items" %>
+            </ul>
+              <div class="hide-for-small-only">
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
+    </div>
     </div>
   </div>
 

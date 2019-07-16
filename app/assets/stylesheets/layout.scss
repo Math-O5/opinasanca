@@ -636,7 +636,7 @@ header {
 }
 
 .top-links {
-  background: $dark;
+  background: #fff;
   color: #fff;
   font-size: $small-font-size;
   padding-right: $line-height / 2;
@@ -660,9 +660,9 @@ header {
     @include breakpoint(medium) {
       display: inline-block;
 
-      //&::after {
-      //  content: '|';
-      //}
+      &::after {
+        content: '|';
+      }
       
 
       &:last-child::after {
