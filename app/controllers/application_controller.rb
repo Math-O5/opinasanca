@@ -78,6 +78,10 @@ class ApplicationController < ActionController::Base
       @proposal_votes = current_user ? current_user.proposal_votes(proposals) : {}
     end
 
+    def set_sugestion_asset(sugestion_assets)
+        @sugestion_assets = current_user ? current_user.sugestion_asset_votes(sugestion_assets) : {}
+    end
+
     def set_spending_proposal_votes(spending_proposals)
       @spending_proposal_votes = current_user ? current_user.spending_proposal_votes(spending_proposals) : {}
     end

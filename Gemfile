@@ -7,17 +7,16 @@ gem 'rails', '4.2.11'
 # Only linux:
 gem 'unicorn', '~> 5.4.1'
 gem 'pg', '~> 0.20.0'
+gem 'tzinfo-data'
 
-# Only Windowns,
+# Only Windowns
+
 #platforms :ruby do 
 #gem 'unicorn', '~> 5.4.1'
+#gem 'pg', '0.21.0'
 #end
 
-
-
-
-gem 'tzinfo-data'
-#gem 'pg', '0.20.0'
+gem 'open_street_map'
 
 # end custom
 

@@ -1,0 +1,14 @@
+<% all_sugestion.each do |sugestion| %>
+
+  <div class="">
+      <div class="small-12 medium-3 column">
+        <div class="small-12 medium-6 column" data-equalizer-watch>
+          <h4>
+              <%= link_to sugestion.title, sugestion %>
+          </h4>
+          <%= sugestion_dates(sugestion) %>
+        </div>
+      </div>
+    
+  </div>  
+<% end %>

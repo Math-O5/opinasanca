@@ -22,11 +22,12 @@
                      i18n_namespace: "sugestion_asset" %>
   
         </div>
-          <%= f.text_field :latitude%>
+          <%= f.label :latitude, value: map_location.latitude %>
           <%= f.text_field :longitude %>
           <%= f.check_box :visible%>
 
       <% end %>
+
 
       <div class="small-12 column">
       <% if @sugestion_asset.new_record? %>

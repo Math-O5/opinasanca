@@ -1,6 +1,5 @@
 class SugestionAssetsController < ApplicationController
   include FeatureFlags
-  include CommentableActions
   include FlagActions
   
   skip_authorization_check
@@ -10,31 +9,39 @@ class SugestionAssetsController < ApplicationController
   feature_flag :sugestion_assets
   respond_to :html, :js
 
-  def show
-    redirect_to sugestion_asset_path(@sugestion_asset), status: :moved_permanently if request.path != sugestion_asset_path(@sugestion_asset)
-  end
+  has_orders %w{newest oldest}, only: :show # to filter comments
 
+  def show
+    if @sugestion_asset.nil?
+      @sugestion_asset= SugestionAsset.find_by(id: params[:id])
+    end
+    @commentable = @sugestion_asset
+    @comment_tree = CommentTree.new(@commentable, params[:page], @current_order, valuations: true)
+  end
+  
   def new 
     @sugestion_asset = SugestionAsset.new()
     load_map
   end
 
   def create
-    @sugestion_asset = SugestionAsset.new(sugestions_assets_params)
-    @map_location = MapLocation.new()
-
+    @sugestion_asset = SugestionAsset.new(sugestions_assets_params.merge(user_id: current_user.id))
+    @client = OpenStreetMap::Client.new
+    
+    load_map
+    
     if @sugestion_asset.save
-      #redirect_to share_sugestion_asset_path(@sugestion_asset), notice: I18n.t('flash.actions.create.sugestion')
+      data_hash = JSON.parse(@client.reverse(format: 'json', lat: @sugestion_asset.latitude.to_s, lon:  @sugestion_asset.longitude.to_s, accept_language: 'pt-BR'))
+      
       redirect_to sugestion_assets_url
     else
       render :new
     end
-
   end
 
   def index
-    @sugestions = SugestionAsset.all
-    @sugestion_map_coordinates = MapLocation.where(sugestion_asset_id: @sugestions).map { |l| l.json_data }
+    @sugestion_assets = SugestionAsset.all
+    @sugestion_map_coordinates = MapLocation.where(sugestion_asset_id: @sugestion_assets).map { |l| l.json_data }
     load_map
   end
 
@@ -44,17 +51,26 @@ class SugestionAssetsController < ApplicationController
       sugestion_id: sugestion.id,
       sugestion_title: sugestion.title,
     }.to_json
-
     respond_to do |format|
       format.json { render json: data }
     end
   end
 
   def share
-  
+
   end 
 
-  private
+ # def show
+  #  load_comments
+  #end
+  
+private
+
+  def load_comments
+    @commentable = @sugestion
+    @comment_tree = CommentTree.new(@commentable, params[:page], @current_order, valuations: true)
+    set_comment_flags(@comment_tree.comments)
+  end
 
 def sugestions_assets_params
   params.require(:sugestion_asset).permit(:title, :description, :skip_map, :latitude, :longitude,
@@ -63,6 +79,16 @@ def sugestions_assets_params
    )            
 end
 
+def resource_model
+  SugestionAsset
+end
+
+def resource_name
+  'sugestion_asset'
+end
+
+def set_sugestion_asset_votes(sugestion_asset)
+end
 
 def load_map
     @map_location = MapLocation.new
