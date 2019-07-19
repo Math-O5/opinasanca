@@ -2,11 +2,13 @@ class SugestionAsset < ActiveRecord::Base
     include Rails.application.routes.url_helpers  
     include Flaggable
     include Mappable
-    include Searchable
     include Filterable
+    include Imageable
+    include Taggable
+
     
     #belongs_to :geozone
-    belongs_to :author, -> { with_hidden }, class_name: 'User', foreign_key: 'user_id'
+    belongs_to :author, -> { with_hidden }, class_name: 'User', foreign_key: 'author_id'
     has_many :comments, as: :commentable, dependent: :destroy
 
     validates :title, presence: true
@@ -29,6 +31,13 @@ class SugestionAsset < ActiveRecord::Base
 
     def url
         sugestion_asset_path(self)
+    end
+
+    def editable?
+    end
+
+    def editable_by?(user)
+        author_id == user.id 
     end
 
     end

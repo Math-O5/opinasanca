@@ -1,53 +1,47 @@
 <div class="small-12 medium-9 column">
   <ul>
     <%= raw content_block("subnavigation_left", I18n.locale) %>
-    <div class="dropdown">
-      <% if feature?(:welcome) %>
-       <li>
+    <% if feature?(:welcome) %>
+    <li>
          <%= layout_menu_link_to t("layouts.header.welcome"),
-                                 debates_path,
-                                 controller_name == 'welcome',
-                                 accesskey: "0",
-                                 title: t("shared.go_to_page") + t("layouts.header.welcome") %>
-        </li>
-     <% end %>
-     <% if feature?(:debates) %>
-       <li>
+         debates_path,
+         controller_name == 'welcome',
+         accesskey: "0",
+         title: t("shared.go_to_page") + t("layouts.header.welcome") %>
+         </li>
+         <% end %>
+         <% if feature?(:debates) %>
+         <li>
          <%= layout_menu_link_to t("layouts.header.debates"),
-                                 debates_path,
-                                 controller_name == 'debates',
-                                 accesskey: "1",
-                                 title: t("shared.go_to_page") + t("layouts.header.debates") %>
-        </li>
-      <% end %>
-      <% if feature?(:sugestion_assets) %>
-       <li>
+         debates_path,
+         controller_name == 'debates',
+         accesskey: "1",
+         title: t("shared.go_to_page") + t("layouts.header.debates") %>
+         </li>
+         <% end %>
+         <% if feature?(:sugestion_assets) %>
+         <li>
          <%= layout_menu_link_to t("layouts.header.sugestion_assets"),
-                                 sugestion_assets_path,
-                                 controller.class == SugestionAssetsController,
-                                 accesskey: "2",
-                                 title: t("shared.go_to_page") + t("layouts.header.sugestion_assets") %>
-        </li>
-     <% end %>
-       
-      <!-- <div class="dropdown"> -->
+         sugestion_assets_path,
+         controller.class == SugestionAssetsController,
+         accesskey: "2",
+         title: t("shared.go_to_page") + t("layouts.header.sugestion_assets") %>
+         </li>
+         <% end %>
+         
       <button class="dropbtn">
         <i class="fa fa-caret-down"></i>
         <% if feature?(:tombamentos) %>
-           <li>
+          
           <%= layout_menu_link_to t("layouts.header.tombamentos"),
                                    tombamentos_path,
                                      controller.class == TombamentosController,                                   accesskey: "3",
                                     title: t("shared.go_to_page") + t("layouts.header.tombamentos") %>  
-          </li>
-          <ul class="dropdown-content"> 
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-          </ul>
+    
+        
         <% end %>
       </button> 
-
+  
      <% if feature?(:polls) %>
        <li>
           <%= layout_menu_link_to t("layouts.header.poll_questions"),
@@ -75,6 +69,6 @@
                                 title: t("shared.go_to_page") + t("layouts.header.budgets") %>
     </li>
   <% end %>
-    <%= raw content_block("subnavigation_right", I18n.locale) %>
+  <%= raw content_block("subnavigation_right", I18n.locale) %>
   </ul>
 </div>

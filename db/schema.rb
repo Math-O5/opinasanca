@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190713045254) do
+ActiveRecord::Schema.define(version: 20190718233833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -435,13 +435,13 @@ ActiveRecord::Schema.define(version: 20190713045254) do
     t.string   "title"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
+    t.integer  "attachment_file_size",    limit: 8
     t.datetime "attachment_updated_at"
     t.integer  "user_id"
     t.integer  "documentable_id"
     t.string   "documentable_type"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "documents", ["documentable_type", "documentable_id"], name: "index_documents_on_documentable_type_and_documentable_id", using: :btree
@@ -537,7 +537,7 @@ ActiveRecord::Schema.define(version: 20190713045254) do
     t.datetime "updated_at",                         null: false
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
+    t.integer  "attachment_file_size",    limit: 8
     t.datetime "attachment_updated_at"
     t.integer  "user_id"
   end
@@ -1206,13 +1206,13 @@ ActiveRecord::Schema.define(version: 20190713045254) do
   add_index "site_customization_content_blocks", ["name", "locale"], name: "index_site_customization_content_blocks_on_name_and_locale", unique: true, using: :btree
 
   create_table "site_customization_images", force: :cascade do |t|
-    t.string   "name",               null: false
+    t.string   "name",                         null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
-    t.integer  "image_file_size"
+    t.integer  "image_file_size",    limit: 8
     t.datetime "image_updated_at"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "site_customization_images", ["name"], name: "index_site_customization_images_on_name", unique: true, using: :btree
@@ -1276,19 +1276,15 @@ ActiveRecord::Schema.define(version: 20190713045254) do
 
   create_table "sugestion_assets", force: :cascade do |t|
     t.string   "title"
-    t.string   "description"
+    t.text     "description"
     t.decimal  "latitude"
     t.decimal  "longitude"
-    t.integer  "user_id"
+    t.integer  "author_id"
     t.boolean  "visible"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "sugestion_id"
-  end
-
-  create_table "sugestion_asstes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "display_name"
+    t.integer  "comments_count"
   end
 
   create_table "taggings", force: :cascade do |t|

@@ -9,16 +9,15 @@
                               id: map_location_input_id(parent_class, 'id') %>
   <%= m_l_fields.hidden_field :latitude,
                               value: map_location.latitude,
-                              id: map_location_input_id(parent_class, 'latitude') %>
+                              id: map_location_input_id(parent_class, 'latitude')
+                              %>
   <%= m_l_fields.hidden_field :longitude,
                               value: map_location.longitude,
                               id: map_location_input_id(parent_class, 'longitude') %>
   <%= m_l_fields.hidden_field :zoom,
                               value: map_location.zoom,
                               id: map_location_input_id(parent_class, 'zoom') %>
-
   <div>
-  
 
   </div>
 <% end %>

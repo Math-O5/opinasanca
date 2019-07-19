@@ -7,15 +7,14 @@
 <h3 style="padding:1rem;"> Sugestões para preservar a memória da cidade. </h3>
 
 <main>
-  <% if @sugestion_assets.any? %>
-    <div class="small-12 medium-3 column">
-    <aside class="margin-bottom">
-    <%= link_to t("sugestion_assets.index.nova_sugestao"),
-              new_sugestion_asset_path,
-              class: 'button expanded' %>
-    </aside>
-    </div>
-  <% end %>
+  <div class="small-12 medium-3 column">
+  <aside class="margin-bottom">
+  <%= link_to t("sugestion_assets.index.nova_sugestao"),
+            new_sugestion_asset_path,
+            class: 'button expanded' %>
+  </aside>
+  </div>
+
 
   <%= render_map(@map_location, "Sugira um bem", true, nil, nil, @sugestion_map_coordinates) %>
 </main>

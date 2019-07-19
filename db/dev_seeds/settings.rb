@@ -60,7 +60,7 @@ section "Creating Settings" do
   Setting.create(key: 'comments_body_max_length', value: '1000')
   Setting.create(key: 'mailer_from_name', value: 'OPINASANCA')
   Setting.create(key: 'mailer_from_address', value: 'noreply@consul.dev')
-  Setting.create(key: 'meta_title', value: 'CONSUL')
+  Setting.create(key: 'meta_title', value: 'OPINASANCA')
   Setting.create(key: 'meta_description', value: 'Citizen participation tool for an open, '\
                                                  'transparent and democratic government')
   Setting.create(key: 'meta_keywords', value: 'citizen participation, open government')

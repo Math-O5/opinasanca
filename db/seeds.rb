@@ -127,10 +127,10 @@ Setting['featured_proposals_number'] = 3
 # Proposal improvement url path ('/help/proposal-improvement')
 Setting['proposal_improvement_path'] = nil
 
-# City map feature default configuration (Greenwich)
-Setting['map_latitude'] = 51.48
-Setting['map_longitude'] = 0.0
-Setting['map_zoom'] = 10
+# City map feature default configuration (São Carlos)
+Setting['map_latitude'] = -22.0
+Setting['map_longitude'] = -47.0
+Setting['map_zoom'] = 9
 
 # Related content
 Setting['related_content_score_threshold'] = -0.3

@@ -9,8 +9,15 @@
     <%= f.cktext_area :description, maxlength: 255 %>
     </div>
 
-      <% if feature?(:map) %>
-        <div class="small-12 column">
+    
+    <% if feature?(:allow_images) %>
+      <div class="images small-12 column">
+        <%= render 'images/nested_image', imageable: @sugestion_asset, f: f %>
+      </div>
+    <% end %>
+
+    <% if feature?(:map) %>
+      <div class="small-12 column">
 
           <%= render 'map_locations/form_fields',
                      form:     f,
@@ -22,13 +29,9 @@
                      i18n_namespace: "sugestion_asset" %>
   
         </div>
-          <%= f.label :latitude, value: map_location.latitude %>
-          <%= f.text_field :longitude %>
-          <%= f.check_box :visible%>
-
       <% end %>
 
-
+     
       <div class="small-12 column">
       <% if @sugestion_asset.new_record? %>
         <%= f.label :terms_of_service do %>
