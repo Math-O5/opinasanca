@@ -1,4 +1,4 @@
-![CONSUL logo](https://github.com/Math-O5/opinasanca/app/assets/images/logo_header.png)
+![OPINASANCA](https://github.com/Math-O5/opinasanca/app/assets/images/logo_header.png)
 
 # OPINASANCA
 Participação cidadã, Patrimonio Cultural e Governo Aberto. 
