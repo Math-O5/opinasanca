@@ -1,4 +1,4 @@
-![OPINASANCA](https://github.com/Math-O5/opinasanca/app/assets/images/logo_header.png)
+![OPINASANCA](https://github.com/Math-O5/opinasanca/blob/master/app/assets/images/custom/logo_header.png)
 
 # OPINASANCA
 Participação cidadã, Patrimonio Cultural e Governo Aberto. 
