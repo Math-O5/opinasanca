@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190718233833) do
+ActiveRecord::Schema.define(version: 20190721044418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1169,6 +1169,19 @@ ActiveRecord::Schema.define(version: 20190718233833) do
   add_index "related_contents", ["parent_relationable_type", "parent_relationable_id"], name: "index_related_contents_on_parent_relationable", using: :btree
   add_index "related_contents", ["related_content_id"], name: "opposite_related_content", using: :btree
 
+  create_table "schedules", force: :cascade do |t|
+    t.string   "title"
+    t.string   "subject"
+    t.text     "description"
+    t.text     "response"
+    t.datetime "date"
+    t.string   "where"
+    t.integer  "priority"
+    t.boolean  "published"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "settings", force: :cascade do |t|
     t.string "key"
     t.string "value"
@@ -1285,6 +1298,7 @@ ActiveRecord::Schema.define(version: 20190718233833) do
     t.datetime "updated_at",     null: false
     t.string   "display_name"
     t.integer  "comments_count"
+    t.string   "city"
   end
 
   create_table "taggings", force: :cascade do |t|

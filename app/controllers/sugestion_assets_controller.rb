@@ -29,22 +29,12 @@ class SugestionAssetsController < ApplicationController
   def create
     @sugestion_asset = SugestionAsset.new(sugestions_assets_params.merge(author_id: current_user.id))
     @client = OpenStreetMap::Client.new
+    
+    data_hash = (@client.reverse(format: 'json', lat: @sugestion_asset.map_location.latitude.to_s, lon:  @sugestion_asset.map_location.longitude.to_s, accept_language: 'pt-BR'))
+    @sugestion_asset.city = data_hash["address"]["city"] 
+    @sugestion_asset.display_name = data_hash["display_name"]
 
     if @sugestion_asset.save
-      @map_location = MapLocation.find_by(sugestion_asset_id: @sugestion_asset.id)
-      
-      @sugestion_asset.latitude = @map_location.latitude
-      @sugestion_asset.longitude = @map_location.longitude
-      
-      data_hash = (@client.reverse(format: 'json', lat: @sugestion_asset.latitude.to_s, lon:  @sugestion_asset.longitude.to_s, accept_language: 'pt-BR'))
-      
-      puts "#{data_hash}"
-      puts "==============================================="
-      puts "#{data_hash["display_name"]}"
-
-      @sugestion_asset.display_name = data_hash["display_name"]
-
-      @sugestion_asset.save
       redirect_to(@sugestion_asset)
     else
       render :new
@@ -52,7 +42,11 @@ class SugestionAssetsController < ApplicationController
   end
 
   def index
-    @sugestion_assets = SugestionAsset.all
+    if params[:search]
+      @sugestion_assets = SugestionAsset.where("display_name like?", "%#{params[:search]}%")  
+    else 
+      @sugestion_assets = SugestionAsset.all
+    end 
     @sugestion_map_coordinates = MapLocation.where(sugestion_asset_id: @sugestion_assets).map { |l| l.json_data }
     load_map
   end
@@ -72,20 +66,24 @@ class SugestionAssetsController < ApplicationController
 
   end 
 
-  # def show
-  #  load_comments
-  #end
-  
   def edit
-    @sugestion_asset = SugestionAsset.find(params[:id])
-
-    if @sugestion_asset.update(sugestions_assets_params.merge(author_id: current_user.id))
+    @sugestion_asset = SugestionAsset.find_by(id: params[:id])
+    if @sugestion_asset.update      
+      @client = OpenStreetMap::Client.new
+      data_hash = (@client.reverse(format: 'json', lat: @sugestion_asset.map_location.latitude.to_s, lon:  @sugestion_asset.map_location.longitude.to_s, accept_language: 'pt-BR'))
+      @sugestion_asset.city = data_hash["address"]["city"] 
+      @sugestion_asset.display_name = data_hash["display_name"]
+      @sugestion_asset.update(sugestions_assets_params.merge(author_id: current_user.id))
       redirect_to(@sugestion_asset)
     else
-      render s:edit
+      render :edit
     end
-  end
+  end 
 
+  def destroy
+
+  end
+  
 private
 
   def load_comments
@@ -95,7 +93,7 @@ private
   end
 
 def sugestions_assets_params
-  params.require(:sugestion_asset).permit(:id, :title, :description, :skip_map, :latitude, :longitude,
+  params.require(:sugestion_asset).permit(:id, :title, :description, :city, :skip_map, :latitude, :longitude,
    :visible, :terms_of_service, :display_name,
    map_location_attributes: [:latitude, :longitude, :zoom],
    image_attributes: [:id, :title, :attachment, :cached_attachment, :user_id, :_destroy]

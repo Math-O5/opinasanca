@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :schedules
   mount Ckeditor::Engine => '/ckeditor'
 
   if Rails.env.development? || Rails.env.staging?

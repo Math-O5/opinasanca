@@ -5,18 +5,20 @@ class SugestionAsset < ActiveRecord::Base
     include Filterable
     include Imageable
     include Taggable
+    include Measurable
 
-    
     #belongs_to :geozone
     belongs_to :author, -> { with_hidden }, class_name: 'User', foreign_key: 'author_id'
-    has_many :comments, as: :commentable, dependent: :destroy
-
+    has_many :comments, as: :commentable
+    
     validates :title, presence: true
     validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
     #validates :latitude, length: { maximum: 22, minimum: 1 }, presence: true, \
     #         format: /\A(-|\+)?([1-8]?\d(?:\.\d{1,})?|90(?:\.0{1,6})?)\z/
     #validates :longitude, length: { maximum: 22, minimum: 1}, presence: true, \
     #         format: /\A(-|\+)?((?:1[0-7]|[1-9])?\d(?:\.\d{1,})?|180(?:\.0{1,})?)\z/
+
+    validates :city, format: /São Carlos/
 
     scope :sort_by_hot_score,        -> { reorder(hot_score: :desc) }
     scope :sort_by_confidence_score, -> { reorder(confidence_score: :desc) }
@@ -28,7 +30,6 @@ class SugestionAsset < ActiveRecord::Base
     scope :sort_by_recommendations,  -> { order(cached_votes_total: :desc) }
     scope :public_for_api,           -> { all }
 
-
     def url
         sugestion_asset_path(self)
     end
@@ -39,5 +40,4 @@ class SugestionAsset < ActiveRecord::Base
     def editable_by?(user)
         author_id == user.id 
     end
-
     end

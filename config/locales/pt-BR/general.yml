@@ -637,6 +637,19 @@ pt-BR:
       title: Recomendações
       see_more: Ver mais recomendações
       hide: Ocultar recomendações
+  sugestion_assets:
+    index:
+      title: Sugira
+      section_header:
+        icon_alt: Ícone de debates
+        title: Sugira um bem
+        help: Ajuda sobre sugerir bens
+      section_footer:
+        title: Ajuda sobre sugestões
+        description: Sugira um bem que possa para entrar em analise para tombamentos. 
+        help_text_1: "O espaço para debates cidadãos destina-se a qualquer um que possa expor questões de seu interesse e àqueles que querem compartilhar opiniões com outras pessoas."
+        help_text_2: 'Para abrir um debate, você precisa se inscrever em %{org}. Os usuários registrados também podem comentar sobre debates abertos e avaliá-los com os botões "Concordo" ou "Discordo" encontrados em cada um deles.'
+    
   social:
     blog: "Blog"
     facebook: "Facebook"
@@ -709,6 +722,7 @@ pt-BR:
     default: Você não possui permissão de acesso a esta página.
     manage:
       all: "Você não possui permissão para executar esta ação '%{action}' em %{subject}."
+  
   users:
     direct_messages:
       new:

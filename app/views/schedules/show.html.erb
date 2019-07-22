@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @schedule.title %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @schedule.subject %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @schedule.description %>
+</p>
+
+<p>
+  <strong>Response:</strong>
+  <%= @schedule.response %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @schedule.date %>
+</p>
+
+<p>
+  <strong>Where:</strong>
+  <%= @schedule.where %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @schedule.priority %>
+</p>
+
+<p>
+  <strong>Published:</strong>
+  <%= @schedule.published %>
+</p>
+
+<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
+<%= link_to 'Back', schedules_path %>

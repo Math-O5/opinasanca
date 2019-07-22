@@ -28,20 +28,16 @@
          title: t("shared.go_to_page") + t("layouts.header.sugestion_assets") %>
          </li>
          <% end %>
-         
-      <button class="dropbtn">
-        <i class="fa fa-caret-down"></i>
-        <% if feature?(:tombamentos) %>
-          
-          <%= layout_menu_link_to t("layouts.header.tombamentos"),
-                                   tombamentos_path,
-                                     controller.class == TombamentosController,                                   accesskey: "3",
-                                    title: t("shared.go_to_page") + t("layouts.header.tombamentos") %>  
-    
         
-        <% end %>
-      </button> 
-  
+    <% if feature?(:proposals) %>
+    <li>
+      <%= layout_menu_link_to t("layouts.header.proposals"),
+                              proposals_path,
+                              controller.class == ProposalsController,
+                              accesskey: "3",
+                              title: t("shared.go_to_page") + t("layouts.header.proposals") %>
+    </li>
+    <% end %>
      <% if feature?(:polls) %>
        <li>
           <%= layout_menu_link_to t("layouts.header.poll_questions"),

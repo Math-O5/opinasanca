@@ -212,6 +212,13 @@ pt-BR:
         name: Nome
         locale: localidade
         body: Corpo
+      sugestion_asset:
+        author_id: "autor"
+        title: "Sugira"
+        description: "Descrição"
+        terms_of_service: "Termos de serviço"
+        created_at: "Criado em"
+
       legislation/process:
         title: Título do processo
         summary: Resumo

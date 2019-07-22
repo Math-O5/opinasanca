@@ -36,4 +36,13 @@
                                   title: t("shared.go_to_page") + t("layouts.header.budgets") %>
       </li>
     <% end %>
+    <% if feature?(:tombamentos) %>
+          
+    <%= layout_menu_link_to t("layouts.header.tombamentos"),
+                             tombamentos_path,
+                               controller.class == TombamentosController,                                   accesskey: "3",
+                              title: t("shared.go_to_page") + t("layouts.header.tombamentos") %>  
+
+  
+  <% end %>
     -->

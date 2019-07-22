@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  has_filters %w{proposals debates budget_investments comments follows}, only: :show
+  has_filters %w{proposals debates budget_investments sugestion_assets comments follows}, only: :show
 
   load_and_authorize_resource
   helper_method :author?
@@ -16,6 +16,7 @@ class UsersController < ApplicationController
                           proposals: Proposal.where(author_id: @user.id).count,
                           debates: (Setting['feature.debates'] ? Debate.where(author_id: @user.id).count : 0),
                           budget_investments: (Setting['feature.budgets'] ? Budget::Investment.where(author_id: @user.id).count : 0),
+                          sugestion_assets: (Setting['feature.sugestion_assets'] ? SugestionAsset.where(author_id: @user.id).count : 0),
                           comments: only_active_commentables.count,
                           follows: @user.follows.map(&:followable).compact.count)
     end
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
       when "proposals" then load_proposals
       when "debates"   then load_debates
       when "budget_investments" then load_budget_investments
+      when "sugestion_assets" then load_sugestion_assets
       when "comments" then load_comments
       when "follows" then load_follows
       else load_available_activity
@@ -42,6 +44,9 @@ class UsersController < ApplicationController
       elsif  @activity_counts[:budget_investments] > 0
         load_budget_investments
         @current_filter = "budget_investments"
+      elsif @activity_counts[:sugestion_assets] > 0
+        load_sugestion_assets
+        @current_filter = "sugestion_assets"
       elsif  @activity_counts[:comments] > 0
         load_comments
         @current_filter = "comments"
@@ -65,6 +70,10 @@ class UsersController < ApplicationController
 
     def load_budget_investments
       @budget_investments = Budget::Investment.where(author_id: @user.id).order(created_at: :desc).page(params[:page])
+    end
+
+    def load_sugestion_assets
+      @sugestion_assets = SugestionAsset.where(author_id: @user.id).order(created_at: :desc).page(params[:page])
     end
 
     def load_follows

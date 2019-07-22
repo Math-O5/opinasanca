@@ -1,5 +1,11 @@
 <% provide :title do %><%= t("sugestion_assets.index.title") %><% end %>
 
+  <% content_for :canonical do %>
+    <%= render "shared/canonical", href: sugestion_assets_url %>
+  <% end %>
+  
+  <%= render "shared/section_header", i18n_namespace: "sugestion_assets.index.section_header", image: "polls" %>
+  
 <% if has_banners? %>
   <%= render "shared/banner" %>
 <% end %>
@@ -17,8 +23,11 @@
 
 
   <%= render_map(@map_location, "Sugira um bem", true, nil, nil, @sugestion_map_coordinates) %>
+  <div class="row" style="padding:7px;">
+      <%= form_tag(sugestion_assets_path,:method => :get) do %>
+        <%= text_field_tag 'search', nil, placeholder: 'Pesquise um local...', class: 'text' %>
+        <%= submit_tag(" Pesquisar ", :class => "actions small-12 column button")%>
+      <% end %>
+      <%= render partial: 'all_sugestion', locals: {all_sugestion: @sugestion_assets} %>
+  </div>
 </main>
-
-<%= render partial: 'all_sugestion', locals: {all_sugestion: @sugestion_assets} %>
-
-
