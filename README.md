@@ -1,4 +1,5 @@
-![OPINASANCA](https://github.com/Math-O5/opinasanca/blob/master/app/assets/images/custom/logo_header.png) # OPINASANCA
+![OPINASANCA](https://github.com/Math-O5/opinasanca/blob/master/app/assets/images/custom/logo_header.png)
+
 Participação cidadã, Patrimonio Cultural e Governo Aberto. 
 
 [![Build Status](https://travis-ci.org/consul/consul.svg?branch=master)](https://travis-ci.org/consul/consul)
