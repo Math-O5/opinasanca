@@ -16,15 +16,16 @@
 <%= render "header", header: @header %>
 
 <main>
+<div class="row">
+  <% if @cards.any? %>
+    <div class="small-12 column <%= 'large-8' if feed_processes_enabled? %>">
+      <%= render "cards" %>
+    </div>
+  <% end %>
+  
   <%= render "feeds" %>
 
 
-  <div class="row">
-    <% if @cards.any? %>
-      <div class="small-12 column <%= 'large-8' if feed_processes_enabled? %>">
-        <%= render "cards" %>
-      </div>
-    <% end %>
 
     <div class="small-12 large-4 column">
       <%= render "processes" %>
