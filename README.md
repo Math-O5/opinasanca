@@ -1,8 +1,6 @@
-![CONSUL logo](https://raw.githubusercontent.com/consul/consul/master/public/consul_logo.png)
+![OPINASANCA](https://github.com/Math-O5/opinasanca/blob/master/app/assets/images/custom/logo_header.png)
 
-# CONSUL
-
-Citizen Participation and Open Government Application
+Participação cidadã, Patrimonio Cultural e Governo Aberto. 
 
 [![Build Status](https://travis-ci.org/consul/consul.svg?branch=master)](https://travis-ci.org/consul/consul)
 [![Code Climate](https://codeclimate.com/github/consul/consul/badges/gpa.svg)](https://codeclimate.com/github/consul/consul)
@@ -27,7 +25,9 @@ Development started on [2015 July 15th](https://github.com/consul/consul/commit/
 
 **NOTE**: For more detailed instructions check the [docs](https://consul_docs.gitbooks.io/docs/)
 
-Prerequisites: install git, Ruby 2.3.2, `bundler` gem, Node.js and PostgreSQL (>=9.4).
+Prerequisites: install git, Ruby 2.3.2, `bundler` gem, Node.js Imagebrick and PostgreSQL (>=9.4).
+
+On gemfile, uncomment the lines with "only linux", if you is running in this one, or instead "only windows" for Windows.
 
 ```bash
 git clone https://github.com/consul/consul.git
